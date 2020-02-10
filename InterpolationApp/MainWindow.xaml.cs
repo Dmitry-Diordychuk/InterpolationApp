@@ -46,8 +46,6 @@ namespace InterpolationApp
             //};
             PointsGrid.ItemsSource = points;
             points = points.OrderBy( i => i.x ).ToList();
-
-            
         }
 
         private void ShowCubicSpline()
@@ -124,9 +122,11 @@ namespace InterpolationApp
             mouse.X = Math.Round(mouse.X, 2);
             mouse.Y = Math.Round(mouse.Y, 2);
 
+            
             foreach (var point in resultPoints)
             {
-                if ((Math.Abs(point.x - mouse.X) < 0.05) && (Math.Abs(point.y - mouse.Y) < 0.05))
+                if ((Math.Abs(point.x - mouse.X) < (7*wpfPlot1.plt.GetSettings().xAxisUnitsPerPixel) ) 
+                    && (Math.Abs(point.y - mouse.Y) < (7*wpfPlot1.plt.GetSettings().yAxisUnitsPerPixel) ) )
                 {
                     CoordinatesTextBlock.Text = point.ToString();
                     //Координаты окне
@@ -135,7 +135,8 @@ namespace InterpolationApp
                     break;
                 }
                 else
-                    CoordinatesTextBlock.Text = "";
+                    CoordinatesTextBlock.Text = wpfPlot1.plt.GetSettings().xAxisUnitsPerPixel.ToString();
+                ;
             }
         }
     }
