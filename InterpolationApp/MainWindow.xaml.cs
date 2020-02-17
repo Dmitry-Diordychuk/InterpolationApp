@@ -53,7 +53,7 @@ namespace InterpolationApp
             wpfPlot1.plt.Clear();
             wpfPlot1.plt.Title("Cubic Spline");
             wpfPlot1.plt.PlotScatter(resultPoints.ConvertAll(new Converter<Point, double>(Point.PointToX)).ToArray(),
-                resultPoints.ConvertAll(new Converter<Point, double>(Point.PointToY)).ToArray(), lineWidth:0);
+                resultPoints.ConvertAll(new Converter<Point, double>(Point.PointToY)).ToArray(), lineWidth:1);
             wpfPlot1.plt.PlotScatter( points.ConvertAll( new Converter<Point, double>( Point.PointToX ) ).ToArray(),
                 points.ConvertAll( new Converter<Point, double>( Point.PointToY ) ).ToArray(), lineWidth:0, markerSize:10 );
             wpfPlot1.Render();
@@ -62,7 +62,7 @@ namespace InterpolationApp
 
         private bool CalculateCubicSpline()
         {
-            SplineInterpolation splineInterpolation = new SplineInterpolation(
+            CubicSplineInterpolation splineInterpolation = new CubicSplineInterpolation(
                 points.ConvertAll(new Converter<Point, double>(Point.PointToX)),
                 points.ConvertAll(new Converter<Point, double>(Point.PointToY)));
             resultPoints = new List<Point>();
@@ -135,7 +135,7 @@ namespace InterpolationApp
                     break;
                 }
                 else
-                    CoordinatesTextBlock.Text = wpfPlot1.plt.GetSettings().xAxisUnitsPerPixel.ToString();
+                    //CoordinatesTextBlock.Text = wpfPlot1.plt.GetSettings().xAxisUnitsPerPixel.ToString();
                 ;
             }
         }
